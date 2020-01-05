@@ -5,13 +5,15 @@ class Boss {
   int x_add=10;
   ArrayList danmaku; 
  
-  Boss(float x, float y) {
+  Boss(float x, float y) {  //
     bx = x;
     by = y;  
     danmaku = new ArrayList();
   }
  
-  void fire_360(/*float x, float y*/) {  
+  void fire_360() {
+    noFill();
+    stroke(255, 255, 255);
     rect(bx-bw/2, by-bw/4, bw, bw/2);
     for (int i = danmaku.size()-1; i >= 0; i--) {
       Tama t = (Tama)danmaku.get(i);  
@@ -23,7 +25,7 @@ class Boss {
   void shoot(){
     bx += x_add;
     if(bx > width){
-      bx = 320; x_add *= -1; 
+      bx = width; x_add *= -1; 
       w = random(0.5);
     }else if(bx < 0){
       bx = 0; x_add *= -1;
