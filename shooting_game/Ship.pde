@@ -4,6 +4,7 @@ class Ship {
   float sx; 
   float sy;
   ArrayList ship_bullet;
+  int bw = 15;
 
   Ship() { 
     ship_bullet = new ArrayList();
@@ -24,11 +25,23 @@ class Ship {
 
     stroke(255, 255, 255);
     noFill();
-    triangle(x, y - 7, x - 10, y + 7, x + 10, y + 7);
-    fire();
-    if (mousePressed && frameCount%5==0) {
-      laser.trigger();
-      ship_bullet.add(new Tama_ship(sx, sy, 10, 20));
+    if (ship_shape) {
+      triangle(x, y - 7, x - 10, y + 7, x + 10, y + 7);
+      fire();
+      if ((mousePressed && frameCount%5==0) || (setting && frameCount%3==0)) {
+        laser.trigger();
+        ship_bullet.add(new Tama_ship(sx, sy, 10, 0, 20));
+      }
+    } else {
+      rect(x-bw/2, y-bw/2, bw, bw);
+      fire();
+      if ((mousePressed && frameCount%10==0) || (setting && frameCount%6==0)) {
+        laser.trigger();
+        for (int i = 0; i < 3; i++) {
+          float rad = radians(i*90);  
+          ship_bullet.add(new Tama_ship(sx, sy, 10, 5*cos(rad), 20));
+        }
+      }
     }
   }
 

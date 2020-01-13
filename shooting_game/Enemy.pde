@@ -15,7 +15,11 @@ class Enemy {
   void fire() {
     by += y_add;
     fill(0, 255, 0);
-    rect(bx-bw/2, by-bw/2, bw, bw);
+    if (ship_shape) {
+      rect(bx-bw/2, by-bw/2, bw, bw);
+    } else {
+      triangle(bx, by - 10, bx - 13, by + 10, bx + 13, by + 10);
+    }
     for (int i = bullet.size()-1; i >= 0; i--) {
       Tama_enemy t_e = (Tama_enemy)bullet.get(i);  
       if (t_e.update() == false)   
@@ -30,7 +34,7 @@ class Enemy {
       frame_num = 40;
     } else if (num>=20) {
       bullet_num = 4;
-      frame_num =30;
+      //frame_num =30;
     }
     for (int i = 0; i < bullet_num; i++) {
       bullet.add(new Tama_enemy(bx, by+20*i, 10, 5));
@@ -40,6 +44,7 @@ class Enemy {
   void hit(int n) {
     enemy_HP[n] -= 30;
     if (enemy_HP[n] <= 0) {
+      hit_num++;
       bx = 1000; 
       by = 1000;
     }
