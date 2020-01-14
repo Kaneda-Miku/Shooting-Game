@@ -5,7 +5,7 @@ AudioPlayer song;
 AudioSample laser;
 
 public Boss boss;
-PFont font, font_small, font_japanese;
+PFont font, font_small;
 public boolean gameover, start=true, setting=true, ship_shape=true; //ship_shape true->△ fales->□
 public float ft, basic_time;
 public int boss_time = 10, frame_num;
@@ -40,7 +40,6 @@ void setup() {
   boss.shoot();
   font = loadFont("AgencyFB-Reg-48.vlw");
   font_small = loadFont("AgencyFB-Reg-24.vlw");
-  font_japanese = loadFont("MS-PGothic-24.vlw");
   textFont(font);
 }
 
